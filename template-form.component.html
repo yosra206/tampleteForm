@@ -1,0 +1,60 @@
+<p class="text-center fs-1 mt-5">Form</p>
+<form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm.value);contactForm.reset">
+    <div class="container">
+        <div class="mb-3">
+
+            <label for="exampleInputFirstname" class="form-label">
+                
+        
+                
+                First Name </label>
+            <input type="text" class="form-control" id="firstName" name="firstname" ngModel #firstName="ngModel" required minlength="5" placeholder="Enter yor firstName">
+            <div class="errors" *ngIf="firstName.invalid &&firstName.touched">
+                <div *ngIf="firstName.errors?.['required']">FirstName is required</div>
+                <div *ngIf="firstName.errors?.['minlength']">
+                    FirstName minlength is {{firstName.errors?.['minlength'].requiredLength}}... you have enter {{firstName.errors?.['minlength'].actualLength}}
+                </div>
+            </div>
+            <br>
+            <label for="exampleInputLastname" class="form-label">Last Name </label>
+            <input type="text" class="form-control" id="lastName" name="lastname" ngModel #lastName="ngModel" required minlength="3" placeholder="Enter yor lastName">
+            <div class="errors" *ngIf="lastName.invalid &&lastName.touched">
+                <div *ngIf="lastName.errors?.['required']">LastName is required</div>
+                <div *ngIf="lastName.errors?.['minlength']">
+                    LastName minlength is {{lastName.errors?.['minlength'].requiredLength}}... you have enter {{lastName.errors?.['minlength'].actualLength}}
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" aria-describedby="emailHelp" id="email" name="emaill" ngModel #email="ngModel" required email>
+        <div class="errors" *ngIf="email.invalid &&email.touched">
+            <div *ngIf="email.errors?.['required']"> Email is required </div>
+            <div *ngIf="email.errors?.['email']"> Please enter valid email </div>
+        </div>
+        <br>
+        <input class=" form-check-input" type="radio" id="radio" name="gender" value="Male" ngModel required>
+        <label class=" form-check-label" for="exampleRadios2 ">
+          Male
+        </label>
+
+        <input class="form-check-input ms-2 " type="radio" id="radio" name="gender" value="Female " ngModel required>
+        <label class="form-check-label" for="exampleRadios2 ">
+         Female
+        </label>
+        <div class="mb-3 form-check ">
+            <input class="form-check-input " type="checkbox" class="form-check-input " id="exampleCheck1 " ngModel>
+            <label class="form-check-label " for="exampleCheck1 ">Is Married </label>
+        </div>
+        <select class="form-control" name="country " required ngModel #countryy="ngModel">
+            <option *ngFor="let country of countries ">{{country.name}}</option>
+           
+          </select>
+        <div class="errors " *ngIf="countryy.invalid &&countryy.touched ">
+            <div *ngIf="countryy.errors?.[ 'required'] ">Country is required </div>
+        </div><br>
+
+        <button type="submit " class="btn btn-primary" [disabled]="contactForm.invalid">Submit</button>
+    </div>
+</form>
